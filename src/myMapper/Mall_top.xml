@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="myMapper.Mall_top">
+
+	<insert id="createNewUser" parameterType="Map">
+		insert into mall_user(id,name,password,sex,profession,email,cellphone) values(#{id},#{name},#{password},#{sex},#{profession},#{email},#{cellphone})
+	</insert>
+
+</mapper>

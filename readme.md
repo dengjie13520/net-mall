@@ -1,0 +1,1 @@
+this is a mall with spring+struts2+mybatise
