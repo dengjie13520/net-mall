@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,15 +9,23 @@
 <script src="./js/jquery-1.4.2.min.js"></script>
 <script src="./js/myjs.js"></script>
 </head>
-<body>
+<body id="mall_all">
 	<div id="mall_top">
 		<div style="float:left">Welcome to the mall!</div>
 		<div id="login_register" style="float:left" >
-			<a href="javascript:;"  onclick="my_login()">[log in]</a>
-			<a href="javascript:;" onclick="my_register()"  >[register]</a>
+			<c:choose>
+				<c:when test="${user==null}">
+					<a href="javascript:;"  onclick="my_login()">[log in]</a>
+					<a href="javascript:;" onclick="my_register()"  >[register]</a>
+				</c:when>
+				<c:otherwise>
+					Welcome! ${user }
+				</c:otherwise>
+			</c:choose>
+	
+			
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>
-		
 		<div id="my_zone" align="right" >
 			
 			<a href="javascript:;" >购物车 </a>&nbsp;

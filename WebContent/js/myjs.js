@@ -17,7 +17,7 @@ function log_start(){
 	var user=$("#login_user").val();
 	var password=$("#login_password").val();
 	$.post("log_in.action",{user:user,password:password},function(data,status){
-		$("#mall_middle").html(data);
+		$("#mall_all").html(data);
 	});
 	
 }

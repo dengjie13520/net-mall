@@ -23,7 +23,7 @@
 		</action>
 		<action name="log_in" class="myAction.mytop" method="log_in">
 			<result name="success">
-				/test.jsp
+				/index.jsp
 			</result>
 			<result name="failure">
 				/test.jsp

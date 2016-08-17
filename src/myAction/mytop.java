@@ -3,7 +3,10 @@ package myAction;
 
 import java.util.HashMap;
 
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -24,13 +27,34 @@ public class mytop {
 	private String myresult;
 
 	private mall_forRegister mymfr;
-	
+	public String log_out(){
+		ActionContext ac=ActionContext.getContext();
+		ac.getSession().clear();
+		HttpServletResponse response=ServletActionContext.getResponse();
+		
+		Cookie userCookie=new Cookie("user","");
+		Cookie passwordCookie =new Cookie("password","");
+		userCookie.setMaxAge(0);
+		passwordCookie.setMaxAge(0);
+		
+		userCookie.setPath("/");
+		passwordCookie.setPath("/");
+		
+		response.addCookie(userCookie);
+		response.addCookie(passwordCookie);
+		
+		
+		
+		
+		return "success";
+	}
 	public String log_in(){
 		
 		
 		HashMap<String,String> hhm2=mymfr.getMall_top().lookPassword(user);
-		ActionContext ac=ActionContext.getContext();
+		
 		HttpServletResponse response=ServletActionContext.getResponse();
+		
 		if(hhm2==null){
 			System.out.println("do not find !");
 			myresult="the user does not exist";
@@ -39,6 +63,22 @@ public class mytop {
 			System.out.println(hhm2.get("PASSWORD"));
 			if(password.equals(hhm2.get("PASSWORD"))){
 				myresult="welcome!!!"+user;
+				
+				ActionContext.getContext().getSession().put("user", user);
+				
+				Cookie userCookie=new Cookie("user",user);
+				Cookie passwordCookie=new Cookie("password",password);
+				
+				userCookie.setPath("/dj/");
+				userCookie.setMaxAge(60*60);
+				
+				passwordCookie.setPath("/dj/");
+				passwordCookie.setMaxAge(60*60);
+				
+				response.addCookie(userCookie);
+				response.addCookie(passwordCookie);
+				
+				
 				
 				return "success";
 			}else{

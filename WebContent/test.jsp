@@ -9,5 +9,7 @@
 <body>
 	i am a test file!!!!<br />
 	${myresult}
+	${user}
+	${password}
 </body>
 </html>
