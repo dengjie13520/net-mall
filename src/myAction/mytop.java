@@ -2,6 +2,13 @@ package myAction;
 
 
 import java.util.HashMap;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts2.ServletActionContext;
+
+import com.opensymphony.xwork2.ActionContext;
+
 import myService.mall_forRegister;
 
 public class mytop {
@@ -13,13 +20,36 @@ public class mytop {
 	private String profession;
 	private String email;
 	private String cellphone;
+	
+	private String myresult;
 
 	private mall_forRegister mymfr;
+	
 	public String log_in(){
 		
 		
+		HashMap<String,String> hhm2=mymfr.getMall_top().lookPassword(user);
+		ActionContext ac=ActionContext.getContext();
+		HttpServletResponse response=ServletActionContext.getResponse();
+		if(hhm2==null){
+			System.out.println("do not find !");
+			myresult="the user does not exist";
+			return "failure";
+		}else{
+			System.out.println(hhm2.get("PASSWORD"));
+			if(password.equals(hhm2.get("PASSWORD"))){
+				myresult="welcome!!!"+user;
+				
+				return "success";
+			}else{
+				myresult= "Password does not match user!!!";
+				return "failure";
+			}
+			
+		}
 		
-		return "success";
+		
+		
 	}
 	public String register_start(){
 		
@@ -101,6 +131,12 @@ public class mytop {
 
 	public void setMymfr(mall_forRegister mymfr) {
 		this.mymfr = mymfr;
+	}
+	public String getMyresult() {
+		return myresult;
+	}
+	public void setMyresult(String myresult) {
+		this.myresult = myresult;
 	}
 
 }

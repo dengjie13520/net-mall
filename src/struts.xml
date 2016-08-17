@@ -25,6 +25,9 @@
 			<result name="success">
 				/test.jsp
 			</result>
+			<result name="failure">
+				/test.jsp
+			</result>
 		</action>
 		<action name="test" class="myAction.test" method="showperson">
 			<result name="success">

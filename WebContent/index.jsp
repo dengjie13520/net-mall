@@ -12,7 +12,7 @@
 	<div id="mall_top">
 		<div style="float:left">Welcome to the mall!</div>
 		<div id="login_register" style="float:left" >
-			<a href="javascript:;"  onclick="my_login">[log in]</a>
+			<a href="javascript:;"  onclick="my_login()">[log in]</a>
 			<a href="javascript:;" onclick="my_register()"  >[register]</a>
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		</div>

@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	i am a test file!!!!
+	i am a test file!!!!<br />
+	${myresult}
 </body>
 </html>

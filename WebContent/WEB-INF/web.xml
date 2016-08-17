@@ -20,11 +20,16 @@
     <url-pattern>*.action</url-pattern>
     <url-pattern>*.jsp</url-pattern>
   </filter-mapping>
-  
-  
-  
   <listener>
     <listener-class>myListion.mysessionL</listener-class>
   </listener>
-  
+  <filter>
+    <display-name>FirstVisit</display-name>
+    <filter-name>FirstVisit</filter-name>
+    <filter-class>filter.FirstVisit</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>FirstVisit</filter-name>
+    <url-pattern>/test.jsp</url-pattern>
+  </filter-mapping>
 </web-app>

@@ -12,6 +12,15 @@ function my_login(){
 		$("#mall_middle").html(data);
 	});
 }
+
+function log_start(){
+	var user=$("#login_user").val();
+	var password=$("#login_password").val();
+	$.post("log_in.action",{user:user,password:password},function(data,status){
+		$("#mall_middle").html(data);
+	});
+	
+}
 //email verification
 function email_yz(myf){
 	if(myf.value==""){

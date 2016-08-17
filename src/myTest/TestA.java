@@ -35,6 +35,14 @@ public class TestA {
 		ApplicationContext apc=new ClassPathXmlApplicationContext("applicationContext.xml");
 		mall_forRegister lrs = apc.getBean("mymfr",mall_forRegister.class);
 		System.out.println("hello");
+		
+		HashMap<String,String> hhm2=lrs.getMall_top().lookPassword("EE");
+		if(hhm2==null){
+			System.out.println("do not find !");
+		}else{
+			System.out.println(hhm2.get("PASSWORD"));
+		}
+		
 //		int i=lrs.createNewUser(hhm);
 //		System.out.println(i);
 		

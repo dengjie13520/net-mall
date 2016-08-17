@@ -7,5 +7,7 @@
 	<insert id="createNewUser" parameterType="Map">
 		insert into mall_user(id,name,password,sex,profession,email,cellphone) values(#{id},#{name},#{password},#{sex},#{profession},#{email},#{cellphone})
 	</insert>
-
+	<select id="lookPassword" parameterType="String" resultType="Map">
+		select t.password from mall_user t where t.name=#{name}
+	</select>
 </mapper>
