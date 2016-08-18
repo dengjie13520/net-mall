@@ -19,7 +19,8 @@
 					<a href="javascript:;" onclick="my_register()"  >[register]</a>
 				</c:when>
 				<c:otherwise>
-					Welcome! ${user }
+					Welcome! ${user } &nbsp;
+					<a href="javascript:;" onclick="my_logout()"  >[log out]</a>
 				</c:otherwise>
 			</c:choose>
 	

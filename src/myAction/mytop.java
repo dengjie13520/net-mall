@@ -1,7 +1,11 @@
 package myAction;
 
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
+
+
 
 
 import javax.servlet.http.Cookie;
@@ -31,14 +35,14 @@ public class mytop {
 		ActionContext ac=ActionContext.getContext();
 		ac.getSession().clear();
 		HttpServletResponse response=ServletActionContext.getResponse();
-		
+		response.setCharacterEncoding("UTF-8");
 		Cookie userCookie=new Cookie("user","");
 		Cookie passwordCookie =new Cookie("password","");
 		userCookie.setMaxAge(0);
 		passwordCookie.setMaxAge(0);
 		
-		userCookie.setPath("/");
-		passwordCookie.setPath("/");
+		userCookie.setPath("/dj/");
+		passwordCookie.setPath("/dj/");
 		
 		response.addCookie(userCookie);
 		response.addCookie(passwordCookie);
@@ -48,7 +52,7 @@ public class mytop {
 		
 		return "success";
 	}
-	public String log_in(){
+	public String log_in() throws UnsupportedEncodingException{
 		
 		
 		HashMap<String,String> hhm2=mymfr.getMall_top().lookPassword(user);
@@ -61,13 +65,17 @@ public class mytop {
 			return "failure";
 		}else{
 			System.out.println(hhm2.get("PASSWORD"));
+			
 			if(password.equals(hhm2.get("PASSWORD"))){
+				System.out.println("haahahah");
 				myresult="welcome!!!"+user;
 				
 				ActionContext.getContext().getSession().put("user", user);
 				
-				Cookie userCookie=new Cookie("user",user);
-				Cookie passwordCookie=new Cookie("password",password);
+				Cookie userCookie=new Cookie("user",URLEncoder.encode(user, "UTF-8"));
+				Cookie passwordCookie=new Cookie("password",URLEncoder.encode(password,"UTF-8"));
+				
+				System.out.println("haahahah");
 				
 				userCookie.setPath("/dj/");
 				userCookie.setMaxAge(60*60);
@@ -75,11 +83,13 @@ public class mytop {
 				passwordCookie.setPath("/dj/");
 				passwordCookie.setMaxAge(60*60);
 				
+				System.out.println("haahahah");
+				
 				response.addCookie(userCookie);
 				response.addCookie(passwordCookie);
 				
 				
-				
+				System.out.println("haahahah");
 				return "success";
 			}else{
 				myresult= "Password does not match user!!!";

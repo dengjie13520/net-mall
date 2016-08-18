@@ -21,6 +21,12 @@ function log_start(){
 	});
 	
 }
+//log out
+function my_logout(){
+	$.get("log_out.action",function(data,status){
+		$("#mall_all").html(data);
+	});
+}
 //email verification
 function email_yz(myf){
 	if(myf.value==""){

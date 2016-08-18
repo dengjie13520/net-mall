@@ -1,6 +1,9 @@
 package filter;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -20,26 +23,32 @@ import myService.mall_forRegister;
 
 
 public class FirstVisit implements Filter {
-	private void doBeforeProcessing(ServletRequest request){
+	private void doBeforeProcessing(ServletRequest request) throws UnsupportedEncodingException{
 		HttpSession session =((HttpServletRequest)request).getSession();
 		Cookie[] cookies=((HttpServletRequest)request).getCookies();
 		String user=null;
 		String password =null;
 		if(cookies !=null){
 			for(Cookie c:cookies){
-				System.out.println(c.getName()+"----"+c.getValue());
+//				String myName=URLEncoder.encode(c.getValue(), "UTF-8");
+//				System.out.println(c.getName()+"----"+myName);
+//				myName=URLDecoder.decode(c.getValue(), "UTF-8");
+//				System.out.println(c.getName()+"----"+myName);
+				String myName=URLDecoder.decode(c.getValue(), "UTF-8");
+				
+				System.out.println(c.getName()+"----"+myName);
 				if(c.getName().equals("user")){
-					user=c.getValue();
+					user=myName;
 				}
 				if(c.getName().equals("password")){
-					password=c.getValue();
+					password=myName;
 				}
 			}
 		}
 		if(!((user==null) || (password==null))){
 					mall_forRegister mfr=new ClassPathXmlApplicationContext("applicationContext.xml").getBean("mymfr",mall_forRegister.class);
 					HashMap<String, String> hmm=mfr.getMall_top().lookPassword(user);
-					if(!(hmm.isEmpty())){
+					if(!(hmm==null)){
 						if(hmm.get("PASSWORD").equals(password)){
 							session.setAttribute("user", user);
 							session.setAttribute("password", password);
